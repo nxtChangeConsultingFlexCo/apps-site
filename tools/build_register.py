@@ -23,7 +23,7 @@ APPS = [
         "icon": "assets/auszeit-180.png",
         "seite": "https://auszeit.nxtchange.app/",
         "seite_text": "auszeit.nxtchange.app",
-        "store": "https://apps.apple.com/at/app/id6817406940",
+        "store": "https://apps.apple.com/de/app/id6817406940",
     },
     {
         "name": "Mappe",
