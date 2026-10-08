@@ -29,12 +29,12 @@ APPS = [
         "name": "Mappe",
         "english": None,
         "status": "bau",
-        "status_text": "In Entwicklung",
-        "kurz": "Der Notfallordner der Familie: Was im Ernstfall gebraucht wird, an einem Ort und ohne Suchen.",
-        "plattform": "iPhone",
+        "status_text": "In Entwicklung, bald im App Store",
+        "kurz": "Die Notfallkarte der Familie: Allergien, Blutverdünner, Medikamentenplan, Vollmacht, Hausarzt und Apotheke auf einer Seite. Kein Konto, verschlüsselt auf dem Gerät.",
+        "plattform": "iPhone, Android in Arbeit",
         "icon": None,
-        "seite": None,
-        "seite_text": "mappe.family (in Vorbereitung)",
+        "seite": "https://mappe.family/",
+        "seite_text": "mappe.family",
         "store": None,
     },
 ]
@@ -79,7 +79,7 @@ footer .note{margin-top:16px}
 """
 
 ADDRESS = """      <address>
-        <strong>nxtChange Consulting FlexCo</strong> · Neugasse 9/1 · 8045 Graz, Österreich<br>
+        <strong>nxtChange Consulting FlexCo</strong> · Neugasse 9 Top 1 · 8045 Graz, Österreich<br>
         FN 648962g, Landesgericht für ZRS Graz · UID ATU81922038 · <a href="mailto:apps@nxtchange-consulting.com">apps@nxtchange-consulting.com</a>
       </address>"""
 
@@ -161,21 +161,40 @@ index_body = f"""    <div class="kicker">Register</div>
 impressum_body = """    <div class="kicker">Impressum</div>
     <h1>Anbieter dieser Website und der Apps</h1>
     <section class="text" style="border-top:0;padding-top:0;margin-top:0">
+      <p>Angaben gemäß § 5 ECG und § 25 Mediengesetz (Österreich), zugleich Anbieterkennzeichnung nach § 5 DDG für Nutzer in Deutschland.</p>
+      <h2>Anbieter</h2>
       <p>
         nxtChange Consulting FlexCo<br>
-        Neugasse 9/1<br>
+        Neugasse 9 Top 1<br>
         8045 Graz, Österreich
       </p>
       <p>
-        Firmenbuchnummer: FN 648962g<br>
-        Firmenbuchgericht: Landesgericht für ZRS Graz<br>
-        UID: ATU81922038
+        E-Mail: <a href="mailto:apps@nxtchange-consulting.com">apps@nxtchange-consulting.com</a><br>
+        Telefon: +43 681 20199127<br>
+        Website des Unternehmens: <a href="https://www.nxtchange-consulting.com/">nxtchange-consulting.com</a>
       </p>
       <p>
-        E-Mail: <a href="mailto:apps@nxtchange-consulting.com">apps@nxtchange-consulting.com</a><br>
-        Ansprechpartner: Karl Maier
+        Firmenbuchnummer: FN 648962 g<br>
+        Firmenbuchgericht: Landesgericht für Zivilrechtssachen Graz<br>
+        UID: ATU81922038<br>
+        Vertretungsberechtigt und verantwortlich für den Inhalt: Karl Dominik Maier, MA
       </p>
-      <p>Diese Website informiert über die Apps der nxtChange Consulting FlexCo. Die Rechtstexte der einzelnen Apps (Nutzungsbedingungen, Datenschutz, Support) stehen auf der Seite der jeweiligen App.</p>
+      <h2>Unternehmen</h2>
+      <p>
+        Unternehmensgegenstand: Unternehmensberatung und Entwicklung von Software, darunter die Apps auf dieser Seite.<br>
+        Gewerbe: Dienstleistungen in der automatischen Datenverarbeitung und Informationstechnik, GISA-Zahl 38269912<br>
+        Gewerbe: Unternehmensberatung einschließlich der Unternehmensorganisation, GISA-Zahl 38469459<br>
+        Gewerberechtlicher Geschäftsführer: Karl Dominik Maier, BA MA<br>
+        Mitglied der Wirtschaftskammer Steiermark, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie<br>
+        Aufsichts- und Gewerbebehörde: Magistrat der Stadt Graz<br>
+        Anwendbare Rechtsvorschriften: Gewerbeordnung 1994 (GewO), abrufbar unter <a href="https://www.ris.bka.gv.at/">ris.bka.gv.at</a>
+      </p>
+      <h2>Apps</h2>
+      <p>Die Apps auf dieser Seite sind Angebote der nxtChange Consulting FlexCo. Nutzungsbedingungen, Datenschutz und Support stehen auf der Seite der jeweiligen App.</p>
+      <h2>Streitbeilegung</h2>
+      <p>Plattform der Europäischen Kommission zur Online-Streitbeilegung für Verbraucher: <a href="https://ec.europa.eu/consumers/odr">ec.europa.eu/consumers/odr</a>. Wir sind nicht bereit und nicht verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Beschwerden nimmt apps@nxtchange-consulting.com entgegen.</p>
+      <h2>Urheberrecht</h2>
+      <p>Texte, Gestaltung und Bildschirmfotos dieser Website sind urheberrechtlich geschützt.</p>
     </section>
 """
 
