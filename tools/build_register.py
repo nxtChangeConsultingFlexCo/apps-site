@@ -44,7 +44,7 @@ APPS = [
         "status_text": "In Entwicklung, bald im App Store",
         "kurz": "Die Notfallkarte der Familie: Allergien, Blutverdünner, Medikamentenplan, Vollmacht, Hausarzt und Apotheke auf einer Seite. Kein Konto, verschlüsselt auf dem Gerät.",
         "plattform": "iPhone, Android in Arbeit",
-        "icon": None,
+        "icon": "assets/mappe-180.png",
         "seite": "https://mappe.family/",
         "seite_text": "mappe.family",
         "store": None,
