@@ -106,7 +106,9 @@ def shell(title: str, desc: str, body: str, root: str) -> str:
   <title>{e(title)}</title>
   <meta name="description" content="{e(desc)}">
   <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="{root}favicon.ico" sizes="any">
   <link rel="icon" href="{root}assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="{root}assets/apple-touch-icon.png">
   <style>{CSS}</style>
 </head>
 <body>
@@ -221,8 +223,13 @@ datenschutz_body = """    <div class="kicker">Datenschutz</div>
     </section>
 """
 
+# Allgemein formuliert: eine knappe Namensliste übergeht Google und nimmt stattdessen den Text der ersten App-Karte als Snippet.
+NAMEN = [a["name"] for a in APPS]
+INDEX_DESC = ("nxtChange Consulting entwickelt in Graz kleine Apps für den Alltag, die ohne Konto auskommen. "
+              f"Alle Apps mit Status und Links: {', '.join(NAMEN[:-1])} und {NAMEN[-1]}.")
+
 pages = [
-    ("index.html", "nxtChange Apps", f"Register der Apps von nxtChange Consulting FlexCo, Graz: {', '.join(a['name'] for a in APPS)}.", index_body, "./"),
+    ("index.html", "nxtChange Apps", INDEX_DESC, index_body, "./"),
     ("impressum/index.html", "Impressum", "Anbieterangaben der nxtChange Consulting FlexCo.", impressum_body, "../"),
     ("datenschutz/index.html", "Datenschutz", "Datenschutz auf nxtchange.app.", datenschutz_body, "../"),
 ]
