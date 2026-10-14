@@ -9,7 +9,7 @@ import pathlib
 import sys
 
 OUT = pathlib.Path(sys.argv[1])
-STAND = "8. Oktober 2026"
+STAND = "14. Oktober 2026"
 
 # Reihenfolge: live zuerst, dann im Bau. Status: "live" | "bau"
 APPS = [
@@ -24,6 +24,18 @@ APPS = [
         "seite": "https://auszeit.nxtchange.app/",
         "seite_text": "auszeit.nxtchange.app",
         "store": "https://apps.apple.com/de/app/id6817406940",
+    },
+    {
+        "name": "Stapel",
+        "english": None,
+        "status": "bau",
+        "status_text": "Bald im App Store",
+        "kurz": "Liest Kassenbons und Rechnungen auf dem iPhone: Posten, Summe, Kategorie, Preisverlauf, Ablage als PDF im eigenen Cloud-Ordner. Ohne Account, ohne Server.",
+        "plattform": "iPhone, iOS 17 oder neuer",
+        "icon": "assets/stapel-180.png",
+        "seite": "https://stapel.nxtchange.app/",
+        "seite_text": "stapel.nxtchange.app",
+        "store": None,
     },
     {
         "name": "Mappe",
@@ -210,7 +222,7 @@ datenschutz_body = """    <div class="kicker">Datenschutz</div>
 """
 
 pages = [
-    ("index.html", "nxtChange Apps", "Register der Apps von nxtChange Consulting FlexCo, Graz: Auszeit und weitere.", index_body, "./"),
+    ("index.html", "nxtChange Apps", f"Register der Apps von nxtChange Consulting FlexCo, Graz: {', '.join(a['name'] for a in APPS)}.", index_body, "./"),
     ("impressum/index.html", "Impressum", "Anbieterangaben der nxtChange Consulting FlexCo.", impressum_body, "../"),
     ("datenschutz/index.html", "Datenschutz", "Datenschutz auf nxtchange.app.", datenschutz_body, "../"),
 ]
