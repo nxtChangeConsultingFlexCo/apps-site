@@ -1,4 +1,4 @@
-// Erzeugt die Icons von nxtchange.app aus tools/nxt.png (Schriftzug aus dem nxtChange-Logo):
+// Erzeugt die Icons von nxtchange.app aus assets/nxt.png (Schriftzug aus dem nxtChange-Logo):
 //
 //     assets/apple-touch-icon.png   180 × 180
 //     assets/favicon.png             96 × 96
@@ -17,7 +17,7 @@ func color(_ hex: UInt32, alpha: CGFloat = 1) -> NSColor {
     NSColor(srgbRed: CGFloat((hex >> 16) & 0xFF) / 255, green: CGFloat((hex >> 8) & 0xFF) / 255, blue: CGFloat(hex & 0xFF) / 255, alpha: alpha)
 }
 
-guard let mark = NSImage(contentsOf: root.appendingPathComponent("tools/nxt.png")) else { fatalError("tools/nxt.png fehlt") }
+guard let mark = NSImage(contentsOf: root.appendingPathComponent("assets/nxt.png")) else { fatalError("assets/nxt.png fehlt") }
 let markRatio: CGFloat = 208.0 / 391.0
 
 func render(_ width: Int, _ height: Int, _ draw: (CGContext) -> Void) -> NSBitmapImageRep {
