@@ -9,7 +9,9 @@ import pathlib
 import sys
 
 OUT = pathlib.Path(sys.argv[1])
-STAND = "14. Oktober 2026"
+STAND = "25. Oktober 2026"
+# Stand der Datenschutzerklärung dieser Website: nur ändern, wenn sich ihr Inhalt ändert.
+STAND_DATENSCHUTZ = "14. Oktober 2026"
 
 # Reihenfolge: live zuerst, dann im Bau. Status: "live" | "bau"
 APPS = [
@@ -17,13 +19,14 @@ APPS = [
         "name": "Auszeit",
         "english": "Off Hours",
         "status": "live",
-        "status_text": "Im App Store seit 8. Oktober 2026",
+        "status_text": "Im App Store und bei Google Play",
         "kurz": "Hält gewählte Apps zu festen Zeiten an und schiebt eine kurze Bedenkzeit dazwischen. Ohne Account, ohne Daten.",
-        "plattform": "iPhone (iOS 17 oder neuer), Android in Arbeit",
+        "plattform": "iPhone (iOS 17 oder neuer) und Android (8.0 oder neuer)",
         "icon": "assets/auszeit-180.png",
         "seite": "https://auszeit.nxtchange.app/",
         "seite_text": "auszeit.nxtchange.app",
         "store": "https://apps.apple.com/de/app/id6817406940",
+        "play": "https://play.google.com/store/apps/details?id=at.nxtchange.auszeit",
     },
     {
         "name": "Stapel",
@@ -36,6 +39,7 @@ APPS = [
         "seite": "https://stapel.nxtchange.app/",
         "seite_text": "stapel.nxtchange.app",
         "store": None,
+        "play": None,
     },
     {
         "name": "Mappe",
@@ -48,6 +52,7 @@ APPS = [
         "seite": "https://mappe.family/",
         "seite_text": "mappe.family",
         "store": None,
+        "play": None,
     },
 ]
 
@@ -136,7 +141,7 @@ def shell(title: str, desc: str, body: str, root: str) -> str:
         <a href="https://www.nxtchange-consulting.com/">nxtchange-consulting.com</a>
       </div>
 {ADDRESS}
-      <p class="note">Apple, iPhone und App Store sind Marken der Apple Inc.</p>
+      <p class="note">Apple, iPhone und App Store sind Marken der Apple Inc. Google Play und Android sind Marken der Google LLC.</p>
     </footer>
   </div>
 </body>
@@ -152,6 +157,8 @@ def app_card(a: dict) -> str:
     meta = [f"<span>{e(a['plattform'])}</span>"]
     if a["store"]:
         meta.append(f'<a href="{e(a["store"])}">Im App Store</a>')
+    if a["play"]:
+        meta.append(f'<a href="{e(a["play"])}">Bei Google Play</a>')
     if a["seite"]:
         meta.append(f'<a href="{e(a["seite"])}">{e(a["seite_text"])}</a>')
     elif a["seite_text"]:
@@ -227,7 +234,7 @@ datenschutz_body = """    <div class="kicker">Datenschutz</div>
       <p>Rechtsgrundlage ist unser berechtigtes Interesse, diese Seiten abrufbar zu halten (Art. 6 Abs. 1 lit. f DSGVO).</p>
       <p>Schreibst du uns eine E-Mail, verarbeiten wir deine Angaben nur, um die Anfrage zu beantworten. Verantwortlich ist die nxtChange Consulting FlexCo, Neugasse 9/1, 8045 Graz, apps@nxtchange-consulting.com. Du hast das Recht auf Auskunft, Berichtigung, Löschung und Beschwerde bei der österreichischen Datenschutzbehörde.</p>
       <p>Was die einzelnen Apps verarbeiten, steht in der Datenschutzerklärung der jeweiligen App.</p>
-      <p>Stand: """ + STAND + """</p>
+      <p>Stand: """ + STAND_DATENSCHUTZ + """</p>
     </section>
 """
 
