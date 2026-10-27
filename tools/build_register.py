@@ -221,7 +221,7 @@ impressum_body = """    <div class="kicker">Impressum</div>
       <h2>Apps</h2>
       <p>Die Apps auf dieser Seite sind Angebote der nxtChange Consulting FlexCo. Nutzungsbedingungen, Datenschutz und Support stehen auf der Seite der jeweiligen App.</p>
       <h2>Streitbeilegung</h2>
-      <p>Plattform der Europäischen Kommission zur Online-Streitbeilegung für Verbraucher: <a href="https://ec.europa.eu/consumers/odr">ec.europa.eu/consumers/odr</a>. Wir sind nicht bereit und nicht verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Beschwerden nimmt apps@nxtchange-consulting.com entgegen.</p>
+      <p>Wir sind nicht bereit und nicht verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Beschwerden nimmt apps@nxtchange-consulting.com entgegen.</p>
       <h2>Urheberrecht</h2>
       <p>Texte, Gestaltung und Bildschirmfotos dieser Website sind urheberrechtlich geschützt.</p>
     </section>
