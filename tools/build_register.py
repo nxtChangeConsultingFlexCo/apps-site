@@ -17,6 +17,11 @@ STAND_ISO = "2026-11-02"
 # Stand der Datenschutzerklärung dieser Website: nur ändern, wenn sich ihr Inhalt ändert.
 STAND_DATENSCHUTZ = "14. Oktober 2026"
 
+# Ausnahmen vom Grundsatz „Daten bleiben auf dem Gerät“, gemeinsam für Startseite und llms.txt.
+# {wer} ist „wir … können“ (Startseite) oder „der Anbieter … kann“ (llms.txt).
+AUSNAHMEN = ("Zwei Ausnahmen: Mappe Plus gleicht Ende-zu-Ende verschlüsselt über einen Server ab, den {wer}. "
+             "Und das freiwillige Empfehlungsprogramm von Auszeit legt auf dem iPhone Empfehlungscode und Einlösungen in iCloud bei Apple ab.")
+
 # Reihenfolge: live zuerst, dann im Bau. Status: "live" | "bau"
 APPS = [
     {
@@ -33,6 +38,16 @@ APPS = [
         "play": "https://play.google.com/store/apps/details?id=at.nxtchange.auszeit",
         "llms": "https://auszeit.nxtchange.app/llms.txt",
         "kategorie": "UtilitiesApplication",
+        "os": "iOS 17, Android 8.0",
+        # Schlusszeile des Abschnitts „Mehr zu …“ vor dem Link auf die App-Seite.
+        "weiter": "Alles Weitere, auch die Preise:",
+        # Langtext für die Startseite, je Eintrag ein Absatz. Keine Eurobeträge: Preise stehen auf der App-Seite.
+        "lang": [
+            "Auszeit hält gewählte Apps zu festen Zeiten an. Du legst ein Zeitfenster fest, zum Beispiel 21:00 bis 07:00, und wählst die Tage. Öffnest du in dieser Zeit eine der Apps, kommt zuerst eine kurze Bedenkzeit. Danach entscheidest du: Auszeit nehmen oder eine Ausnahme machen.",
+            "Auf dem iPhone nutzt Auszeit die Bildschirmzeit von iOS, auf Android die Bedienungshilfe. Das greift auch, wenn die App geschlossen ist. Für den Home- oder Startbildschirm gibt es ein Widget.",
+            "Gratis bekommst du eine Auszeit mit bis zu zwei Apps, 15 Sekunden Bedenkzeit und 5 Minuten Ausnahme. Auszeit Plus bringt weitere Auszeiten, mehr Apps und ganze Kategorien. Die Bedenkzeit dauert dann 30 oder 90 Sekunden, oder du sperrst ganz. Ausnahmen gibt es für 1, 5 oder 15 Minuten, dazu „Jetzt bis Ende“.",
+            "Auszeit braucht kein Konto und keinen Server und hat keine Analyse. Sie sieht nicht, wie lange du Apps nutzt. Sie pausiert Apps, keine Webseiten. Es gibt sie in 37 Ländern im App Store und in 36 bei Google Play, auf Deutsch und Englisch.",
+        ],
     },
     {
         "name": "Stapel",
@@ -48,6 +63,14 @@ APPS = [
         "play": None,
         "llms": None,
         "kategorie": "FinanceApplication",
+        "os": "iOS 17",
+        "weiter": "Alles Weitere, auch die Preise:",
+        "lang": [
+            "Stapel liest Kassenbons und Rechnungen. Du fotografierst einen Beleg, wählst ihn aus deinen Fotos oder teilst ein PDF. Die App liest Aussteller, Datum, Summe, Steuersätze und jeden Posten heraus, direkt auf dem iPhone. Dafür nutzt sie Texterkennung und ein Sprachmodell auf dem Gerät. Sie prüft auch, ob die Posten zur Summe passen.",
+            "Jeder Beleg und jeder Posten bekommt eine Kategorie. Korrigierst du sie, lernt Stapel daraus. Belege sortierst du in Stapel wie Privat oder Firma. Ein Stapel ist gratis, weitere gibt es mit Plus. Im Überblick siehst du alles nach Monat, Jahr, Aussteller und Produkt, dazu den Preisverlauf. Stapel erinnert dich an Garantie und Zahlungsfrist.",
+            "Mit Plus legt Stapel das Original als durchsuchbares PDF in iCloud Drive, OneDrive oder Google Drive ab. Für die Kanzlei erzeugt die App je Zeitraum ein ZIP: einen Ordner je Belegkreis und eine CSV, zum Beispiel für RZL oder BMD.",
+            "Stapel braucht kein Konto und keinen Server und zeigt keine Werbung. Die App ist ein Überblick, keine Buchhaltung. Die Erkennung kann sich irren, deshalb lässt sich jeder Wert ändern. Stapel kommt bald in den App Store, für das iPhone mit iOS 17 oder neuer. Android ist in Arbeit.",
+        ],
     },
     {
         "name": "Mappe",
@@ -63,6 +86,16 @@ APPS = [
         "play": None,
         "llms": "https://mappe.family/llms.txt",
         "kategorie": "HealthApplication",
+        "os": "iOS, watchOS",
+        "weiter": "Alles Weitere:",
+        # Keine Gesundheitsversprechen und keine Preise.
+        "lang": [
+            "Mappe ist die Gesundheitsmappe der Familie, mit Notfallkarte. Du legst eine Mappe je Person an, etwa für deine Eltern, deine Schwiegereltern oder dich selbst. Jede Mappe hat sechs Fächer: Person, Körper, Medikamente, Menschen, Rechte und Wohnen.",
+            "Die Notfallkarte fasst das Wichtigste auf einer Seite zusammen: Allergien und Blutverdünner, den Medikamentenplan, ob es Vollmacht, Betreuung oder Patientenverfügung gibt (ja, nein oder unklar) und wo das Original liegt, dazu Hausarzt und Apotheke. Sie steht als Widget auf dem Sperrbildschirm und in der gesperrten App bereit. Als PDF trägt sie den Stand in der Fußzeile.",
+            "Einen Medikationsplan kannst du fotografieren. Die App liest Namen, Dosis und Tageszeiten auf dem iPhone heraus, die Familie bestätigt. Kein Bild verlässt das Gerät. Die Daten liegen verschlüsselt auf dem Gerät, mit Face ID. Ein Konto brauchst du nicht.",
+            "Kostenlos sind die Notfallkarte und eine Mappe mit sechs Fächern. Mit Mappe Plus legst du bis zu sechs Mappen an und lädst bis zu zehn Angehörige ein. Für jede Person wählst du die Rechte Notfall, Alltag oder Vertraulich, mit oder ohne Schreibrecht. Plus bringt außerdem die Apple Watch, das Abhaken von Gaben und die Einladung eines Pflegedienstes. Für Pflegeagenturen gibt es ein Portal im Browser unter portal.mappe.family.",
+            "Mappe ist kein Medizinprodukt. Sie bewertet nichts, berechnet keine Dosierungen und ersetzt keine ärztliche Auskunft. Mappe ist in Entwicklung und kommt bald in den App Store, für iPhone und Apple Watch. Android ist in Arbeit.",
+        ],
     },
 ]
 
@@ -140,7 +173,7 @@ def index_ld() -> list:
         {"@type": "ItemList", "@id": SITE + "/#apps", "name": "Apps von nxtChange Consulting",
          "itemListElement": [
              {"@type": "ListItem", "position": i,
-              "item": {"@type": "SoftwareApplication", "name": a["name"], "url": a["seite"], "operatingSystem": a["plattform"],
+              "item": {"@type": "SoftwareApplication", "name": a["name"], "url": a["seite"], "operatingSystem": a["os"],
                        "applicationCategory": a["kategorie"], "publisher": org}}
              for i, a in enumerate(APPS, 1)]},
     ]
@@ -231,12 +264,35 @@ def app_card(a: dict) -> str:
       </li>"""
 
 
+def app_text(a: dict) -> str:
+    e = html.escape
+    absaetze = "\n".join(f"      <p>{e(t)}</p>" for t in a["lang"])
+    return f"""    <section class="text" id="{a['name'].lower()}">
+      <h2>Mehr zu {e(a['name'])}</h2>
+{absaetze}
+      <p>{e(a['weiter'])} <a href="{e(a['seite'])}">{e(a['seite_text'])}</a></p>
+    </section>"""
+
+
 index_body = f"""    <div class="kicker">Register</div>
     <h1>Apps von nxtChange Consulting.</h1>
     <p class="lead">Kleine Werkzeuge für den Alltag, entwickelt in Graz. Diese Seite führt alle Apps, auch die, die noch im Bau sind.</p>
     <ul class="apps">
 {chr(10).join(app_card(a) for a in APPS)}
     </ul>
+    <section class="text" id="gemeinsam">
+      <h2>Was alle Apps gemeinsam haben</h2>
+      <p>Alle Apps kommen ohne Konto aus. Du lädst sie, richtest sie ein und legst los. Es gibt keine Werbung und keine Analyse-SDKs.</p>
+      <p>Deine Daten bleiben auf dem Gerät. Was du selbst weitergibst, etwa ein PDF aus Stapel in deinen Cloud-Ordner, entscheidest du. {html.escape(AUSNAHMEN.format(wer='wir nicht lesen können'))}</p>
+      <p>Die Apps sind auf Deutsch, Auszeit gibt es auch auf Englisch. Was eine App kostet und was die Plus-Version dazu bringt, steht auf der Seite der jeweiligen App.</p>
+    </section>
+{chr(10).join(app_text(a) for a in APPS)}
+    <section class="text" id="anbieter">
+      <h2>Wer dahinter steht</h2>
+      <p>Die Apps entwickelt Karl Maier, MA, Gründer der nxtChange Consulting FlexCo in Graz. Es ist ein Ein-Personen-Projekt ohne Investoren.</p>
+      <p>Das Unternehmen berät außerdem in Digital Change Management mit Schwerpunkt CRM. Mehr dazu auf <a href="https://www.nxtchange-consulting.com/">nxtchange-consulting.com</a>.</p>
+      <p>Anbieter aller Apps ist die nxtChange Consulting FlexCo, Neugasse 9 Top 1, 8045 Graz, Österreich. Die vollständigen Angaben stehen im <a href="impressum/">Impressum</a>.</p>
+    </section>
     <section class="text" id="kontakt">
       <h2>Kontakt</h2>
       <p>Fragen, Fehler und Wünsche zu allen Apps: <a href="mailto:apps@nxtchange-consulting.com">apps@nxtchange-consulting.com</a>. Wir antworten in der Regel innerhalb weniger Werktage.</p>
@@ -360,7 +416,7 @@ def llms_txt() -> str:
     seiten = "\n".join(f"- [{'Startseite' if path == '/' else title.split(' · ')[0]}]({SITE}{path}): {desc}" for _, path, title, desc, *_ in pages)
     return f"""# nxtChange Apps
 
-> nxtchange.app ist das Register der Apps von nxtChange Consulting FlexCo aus Graz, Österreich. Es führt alle Apps mit Status und Links, auch die, die noch im Bau sind: {', '.join(NAMEN[:-1])} und {NAMEN[-1]}. Alle Apps kommen ohne Konto aus, ohne Werbung und ohne Analyse-SDKs; die Daten bleiben auf dem Gerät. Einzige Ausnahme: Mappe Plus gleicht Ende-zu-Ende verschlüsselt über einen Server ab, den der Anbieter nicht lesen kann.
+> nxtchange.app ist das Register der Apps von nxtChange Consulting FlexCo aus Graz, Österreich. Es führt alle Apps mit Status und Links, auch die, die noch im Bau sind: {', '.join(NAMEN[:-1])} und {NAMEN[-1]}. Alle Apps kommen ohne Konto aus, ohne Werbung und ohne Analyse-SDKs; die Daten bleiben auf dem Gerät. {AUSNAHMEN.format(wer='der Anbieter nicht lesen kann')}
 
 - Anbieter: nxtChange Consulting FlexCo, Neugasse 9 Top 1, 8045 Graz, Österreich
 - Gründer und Entwickler: Karl Maier, MA; Ein-Personen-Projekt ohne Investoren

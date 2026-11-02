@@ -1,6 +1,6 @@
 # nxtChange Apps
 
-> nxtchange.app ist das Register der Apps von nxtChange Consulting FlexCo aus Graz, Österreich. Es führt alle Apps mit Status und Links, auch die, die noch im Bau sind: Auszeit, Stapel und Mappe. Alle Apps kommen ohne Konto aus, ohne Werbung und ohne Analyse-SDKs; die Daten bleiben auf dem Gerät. Einzige Ausnahme: Mappe Plus gleicht Ende-zu-Ende verschlüsselt über einen Server ab, den der Anbieter nicht lesen kann.
+> nxtchange.app ist das Register der Apps von nxtChange Consulting FlexCo aus Graz, Österreich. Es führt alle Apps mit Status und Links, auch die, die noch im Bau sind: Auszeit, Stapel und Mappe. Alle Apps kommen ohne Konto aus, ohne Werbung und ohne Analyse-SDKs; die Daten bleiben auf dem Gerät. Zwei Ausnahmen: Mappe Plus gleicht Ende-zu-Ende verschlüsselt über einen Server ab, den der Anbieter nicht lesen kann. Und das freiwillige Empfehlungsprogramm von Auszeit legt auf dem iPhone Empfehlungscode und Einlösungen in iCloud bei Apple ab.
 
 - Anbieter: nxtChange Consulting FlexCo, Neugasse 9 Top 1, 8045 Graz, Österreich
 - Gründer und Entwickler: Karl Maier, MA; Ein-Personen-Projekt ohne Investoren
