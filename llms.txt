@@ -1,0 +1,31 @@
+# nxtChange Apps
+
+> nxtchange.app ist das Register der Apps von nxtChange Consulting FlexCo aus Graz, Österreich. Es führt alle Apps mit Status und Links, auch die, die noch im Bau sind: Auszeit, Stapel und Mappe. Alle Apps kommen ohne Konto aus, ohne Werbung und ohne Analyse-SDKs; die Daten bleiben auf dem Gerät. Einzige Ausnahme: Mappe Plus gleicht Ende-zu-Ende verschlüsselt über einen Server ab, den der Anbieter nicht lesen kann.
+
+- Anbieter: nxtChange Consulting FlexCo, Neugasse 9 Top 1, 8045 Graz, Österreich
+- Gründer und Entwickler: Karl Maier, MA; Ein-Personen-Projekt ohne Investoren
+- Sprachen: Deutsch, Auszeit auch Englisch
+- Support: apps@nxtchange-consulting.com, Antwort in der Regel innerhalb weniger Werktage
+- Unternehmen: berät außerdem in Digital Change Management mit Schwerpunkt CRM, https://nxtchange-consulting.com/
+
+## Apps
+
+- [Auszeit (English: Off Hours)](https://auszeit.nxtchange.app/): Hält gewählte Apps zu festen Zeiten an und schiebt eine kurze Bedenkzeit dazwischen. Ohne Account, ohne Daten.
+  - Status: Im App Store und bei Google Play
+  - Plattformen: iPhone (iOS 17 oder neuer) und Android (8.0 oder neuer)
+  - App Store: https://apps.apple.com/de/app/id6817406940
+  - Google Play: https://play.google.com/store/apps/details?id=at.nxtchange.auszeit
+  - Kurzfassung für Sprachmodelle: https://auszeit.nxtchange.app/llms.txt
+- [Stapel](https://stapel.nxtchange.app/): Liest Kassenbons und Rechnungen auf dem iPhone: Posten, Summe, Kategorie, Preisverlauf, Ablage als PDF im eigenen Cloud-Ordner. Ohne Account, ohne Server.
+  - Status: Bald im App Store
+  - Plattformen: iPhone (iOS 17 oder neuer), Android in Arbeit
+- [Mappe](https://mappe.family/): Die Gesundheitsmappe der Familie, mit Notfallkarte: Allergien, Medikamente, Vollmacht, Befunde und Impfpass an einem Ort. Verschlüsselt auf dem Gerät, ohne Konto nutzbar.
+  - Status: In Entwicklung, bald im App Store
+  - Plattformen: iPhone und Apple Watch, Android in Arbeit
+  - Kurzfassung für Sprachmodelle: https://mappe.family/llms.txt
+
+## Seiten
+
+- [Startseite](https://nxtchange.app/): nxtChange Consulting entwickelt in Graz kleine Apps für den Alltag, die ohne Konto auskommen. Alle Apps mit Status und Links: Auszeit, Stapel und Mappe.
+- [Impressum](https://nxtchange.app/impressum/): Anbieterangaben der nxtChange Consulting FlexCo.
+- [Datenschutz](https://nxtchange.app/datenschutz/): Datenschutz auf nxtchange.app.

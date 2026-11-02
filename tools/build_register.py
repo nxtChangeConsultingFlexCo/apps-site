@@ -9,7 +9,10 @@ import pathlib
 import sys
 
 OUT = pathlib.Path(sys.argv[1])
-STAND = "25. Oktober 2026"
+SITE = "https://nxtchange.app"
+# STAND steht sichtbar auf der Startseite, STAND_ISO ist dasselbe Datum für sitemap.xml (lastmod).
+STAND = "2. November 2026"
+STAND_ISO = "2026-11-02"
 # Stand der Datenschutzerklärung dieser Website: nur ändern, wenn sich ihr Inhalt ändert.
 STAND_DATENSCHUTZ = "14. Oktober 2026"
 
@@ -27,6 +30,7 @@ APPS = [
         "seite_text": "auszeit.nxtchange.app",
         "store": "https://apps.apple.com/de/app/id6817406940",
         "play": "https://play.google.com/store/apps/details?id=at.nxtchange.auszeit",
+        "llms": "https://auszeit.nxtchange.app/llms.txt",
     },
     {
         "name": "Stapel",
@@ -40,6 +44,7 @@ APPS = [
         "seite_text": "stapel.nxtchange.app",
         "store": None,
         "play": None,
+        "llms": None,
     },
     {
         "name": "Mappe",
@@ -53,6 +58,7 @@ APPS = [
         "seite_text": "mappe.family",
         "store": None,
         "play": None,
+        "llms": "https://mappe.family/llms.txt",
     },
 ]
 
@@ -243,14 +249,88 @@ NAMEN = [a["name"] for a in APPS]
 INDEX_DESC = ("nxtChange Consulting entwickelt in Graz kleine Apps für den Alltag, die ohne Konto auskommen. "
               f"Alle Apps mit Status und Links: {', '.join(NAMEN[:-1])} und {NAMEN[-1]}.")
 
+# (Datei, Pfad auf der Website, Titel, Beschreibung, Inhalt, relativer Weg zur Wurzel)
 pages = [
-    ("index.html", "nxtChange Apps", INDEX_DESC, index_body, "./"),
-    ("impressum/index.html", "Impressum", "Anbieterangaben der nxtChange Consulting FlexCo.", impressum_body, "../"),
-    ("datenschutz/index.html", "Datenschutz", "Datenschutz auf nxtchange.app.", datenschutz_body, "../"),
+    ("index.html", "/", "nxtChange Apps", INDEX_DESC, index_body, "./"),
+    ("impressum/index.html", "/impressum/", "Impressum", "Anbieterangaben der nxtChange Consulting FlexCo.", impressum_body, "../"),
+    ("datenschutz/index.html", "/datenschutz/", "Datenschutz", "Datenschutz auf nxtchange.app.", datenschutz_body, "../"),
 ]
-for rel, title, desc, body, root in pages:
+
+AI_CRAWLERS = [
+    "GPTBot", "OAI-SearchBot", "ChatGPT-User",
+    "ClaudeBot", "Claude-SearchBot", "Claude-User",
+    "PerplexityBot", "Perplexity-User",
+    "Google-Extended", "Applebot-Extended", "Amazonbot", "Meta-ExternalAgent",
+    "MistralAI-User", "DuckAssistBot", "CCBot",
+]
+
+
+def robots_txt() -> str:
+    agents = "\n".join(f"User-agent: {name}" for name in AI_CRAWLERS)
+    return f"""# nxtchange.app: alle öffentlichen Seiten dürfen gelesen, in Suchindizes aufgenommen, zusammengefasst und zitiert
+# werden, auch von KI-Suchdiensten und KI-Assistenten. Kurzfassung für Sprachmodelle: {SITE}/llms.txt
+
+User-agent: *
+Allow: /
+
+{agents}
+Allow: /
+
+Sitemap: {SITE}/sitemap.xml
+"""
+
+
+def sitemap_xml() -> str:
+    urls = "\n".join(f"  <url><loc>{SITE}{path}</loc><lastmod>{STAND_ISO}</lastmod></url>" for _, path, *_ in pages)
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{urls}
+</urlset>
+"""
+
+
+def llms_txt() -> str:
+    def app(a: dict) -> str:
+        name = f"{a['name']} (English: {a['english']})" if a["english"] else a["name"]
+        zeilen = [f"- [{name}]({a['seite']}): {a['kurz']}",
+                  f"  - Status: {a['status_text']}",
+                  f"  - Plattformen: {a['plattform']}"]
+        if a["store"]:
+            zeilen.append(f"  - App Store: {a['store']}")
+        if a["play"]:
+            zeilen.append(f"  - Google Play: {a['play']}")
+        if a["llms"]:
+            zeilen.append(f"  - Kurzfassung für Sprachmodelle: {a['llms']}")
+        return "\n".join(zeilen)
+    seiten = "\n".join(f"- [{'Startseite' if path == '/' else title}]({SITE}{path}): {desc}" for _, path, title, desc, *_ in pages)
+    return f"""# nxtChange Apps
+
+> nxtchange.app ist das Register der Apps von nxtChange Consulting FlexCo aus Graz, Österreich. Es führt alle Apps mit Status und Links, auch die, die noch im Bau sind: {', '.join(NAMEN[:-1])} und {NAMEN[-1]}. Alle Apps kommen ohne Konto aus, ohne Werbung und ohne Analyse-SDKs; die Daten bleiben auf dem Gerät. Einzige Ausnahme: Mappe Plus gleicht Ende-zu-Ende verschlüsselt über einen Server ab, den der Anbieter nicht lesen kann.
+
+- Anbieter: nxtChange Consulting FlexCo, Neugasse 9 Top 1, 8045 Graz, Österreich
+- Gründer und Entwickler: Karl Maier, MA; Ein-Personen-Projekt ohne Investoren
+- Sprachen: Deutsch, Auszeit auch Englisch
+- Support: apps@nxtchange-consulting.com, Antwort in der Regel innerhalb weniger Werktage
+- Unternehmen: berät außerdem in Digital Change Management mit Schwerpunkt CRM, https://nxtchange-consulting.com/
+
+## Apps
+
+{chr(10).join(app(a) for a in APPS)}
+
+## Seiten
+
+{seiten}
+"""
+
+
+for rel, path, title, desc, body, root in pages:
     body = body.replace('src="assets/', f'src="{root}assets/')
     target = OUT / rel
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(shell(title, desc, body, root), encoding="utf-8")
     print(f"{target} ({target.stat().st_size // 1024} KB)")
+
+for name, text in [("robots.txt", robots_txt()), ("sitemap.xml", sitemap_xml()), ("llms.txt", llms_txt())]:
+    target = OUT / name
+    target.write_text(text, encoding="utf-8")
+    print(f"{target} ({target.stat().st_size} B)")

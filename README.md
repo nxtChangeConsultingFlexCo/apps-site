@@ -4,7 +4,9 @@ Register der Apps von nxtChange Consulting FlexCo, erreichbar unter https://nxtc
 `main`, Wurzelordner, statisches HTML ohne Jekyll).
 
 - `index.html` Startseite mit allen Apps, `impressum/`, `datenschutz/` (Datenschutz dieser Website)
-- `tools/build_register.py` erzeugt die drei Seiten; die App-Liste steht im Skript (`APPS`).
+- `robots.txt` (alles erlaubt, KI-Crawler ausdrücklich genannt), `sitemap.xml` (die drei Seiten mit `STAND_ISO` als
+  lastmod) und `llms.txt` (Kurzfassung für Sprachmodelle, aus `APPS` gespeist) im Wurzelordner
+- `tools/build_register.py` erzeugt die drei Seiten und diese drei Dateien; die App-Liste steht im Skript (`APPS`).
   Neue App: Eintrag ergänzen, `python3 -I tools/build_register.py .` ausführen, committen.
 - `assets/` Icons (180 px je App, Favicon 96 px, Apple-Touch-Icon 180 px), dazu `favicon.ico` im Wurzelordner. Favicon und
   Touch-Icon zeigen den nxt-Schriftzug dunkel eingraviert in poliertes Gold, damit sich das Register vom schwarz-weißen
