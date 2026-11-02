@@ -27,5 +27,5 @@
 ## Seiten
 
 - [Startseite](https://nxtchange.app/): nxtChange Consulting entwickelt in Graz kleine Apps für den Alltag, die ohne Konto auskommen. Alle Apps mit Status und Links: Auszeit, Stapel und Mappe.
-- [Impressum](https://nxtchange.app/impressum/): Anbieterangaben der nxtChange Consulting FlexCo.
-- [Datenschutz](https://nxtchange.app/datenschutz/): Datenschutz auf nxtchange.app.
+- [Impressum](https://nxtchange.app/impressum/): Impressum von nxtchange.app: Anbieter der Apps ist die nxtChange Consulting FlexCo in Graz. Firmenbuch, UID, Gewerbe und Kontakt.
+- [Datenschutz](https://nxtchange.app/datenschutz/): Datenschutz auf nxtchange.app: Hosting bei GitHub Pages, keine Cookies, keine Analyse, keine Skripte von Dritten. Deine Rechte und der Kontakt.

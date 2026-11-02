@@ -14,3 +14,6 @@ Register der Apps von nxtChange Consulting FlexCo, erreichbar unter https://nxtc
 - `CNAME` bindet die Domain; die DNS-Einträge liegen bei Hostinger.
 
 Die Seiten der einzelnen Apps haben eigene Repos, zum Beispiel `auszeit-legal` für auszeit.nxtchange.app.
+
+Jede Seite hat Canonical, Open Graph und JSON-LD (Startseite: Organisation, Website und die Apps als Liste, Unterseiten:
+WebPage). [[KARL BESTÄTIGEN]] Vorschaubild 1200×630 für nxtchange.app fehlt; vorerst das Touch-Icon (`OG_IMAGE` im Skript).

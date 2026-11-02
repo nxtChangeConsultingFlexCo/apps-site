@@ -5,6 +5,7 @@ Aufruf im Repo-Wurzelordner: python3 -I tools/build_register.py .
 Neue App: einen Eintrag in APPS ergänzen und neu erzeugen. Icons liegen unter <ausgabeordner>/assets/.
 """
 import html
+import json
 import pathlib
 import sys
 
@@ -31,6 +32,7 @@ APPS = [
         "store": "https://apps.apple.com/de/app/id6817406940",
         "play": "https://play.google.com/store/apps/details?id=at.nxtchange.auszeit",
         "llms": "https://auszeit.nxtchange.app/llms.txt",
+        "kategorie": "UtilitiesApplication",
     },
     {
         "name": "Stapel",
@@ -45,6 +47,7 @@ APPS = [
         "store": None,
         "play": None,
         "llms": None,
+        "kategorie": "FinanceApplication",
     },
     {
         "name": "Mappe",
@@ -59,6 +62,7 @@ APPS = [
         "store": None,
         "play": None,
         "llms": "https://mappe.family/llms.txt",
+        "kategorie": "HealthApplication",
     },
 ]
 
@@ -111,7 +115,43 @@ ADDRESS = """      <address>
       </address>"""
 
 
-def shell(title: str, desc: str, body: str, root: str) -> str:
+# [[KARL BESTÄTIGEN]] Vorschaubild 1200×630 für nxtchange.app fehlt; vorerst das Touch-Icon (180×180).
+OG_IMAGE = SITE + "/assets/apple-touch-icon.png"
+OG_IMAGE_SIZE = 180
+OG_IMAGE_ALT = "nxt-Schriftzug auf Gold, das Zeichen von nxtChange Apps"
+ORG_ID = "https://nxtchange-consulting.com/#unternehmen"
+WEBSITE_ID = SITE + "/#website"
+
+
+def json_ld(graph: list) -> str:
+    data = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
+    return '\n  <script type="application/ld+json">' + data.replace("</", "<\\/") + "</script>"
+
+
+def index_ld() -> list:
+    org = {"@id": ORG_ID}
+    return [
+        {"@type": "Organization", "@id": ORG_ID, "name": "nxtChange Consulting FlexCo", "url": "https://nxtchange-consulting.com/",
+         "logo": OG_IMAGE, "email": "apps@nxtchange-consulting.com",
+         "address": {"@type": "PostalAddress", "streetAddress": "Neugasse 9 Top 1", "postalCode": "8045",
+                     "addressLocality": "Graz", "addressCountry": "AT"},
+         "founder": {"@type": "Person", "name": "Karl Maier, MA"}},
+        {"@type": "WebSite", "@id": WEBSITE_ID, "name": "nxtChange Apps", "url": SITE + "/", "inLanguage": "de", "publisher": org},
+        {"@type": "ItemList", "@id": SITE + "/#apps", "name": "Apps von nxtChange Consulting",
+         "itemListElement": [
+             {"@type": "ListItem", "position": i,
+              "item": {"@type": "SoftwareApplication", "name": a["name"], "url": a["seite"], "operatingSystem": a["plattform"],
+                       "applicationCategory": a["kategorie"], "publisher": org}}
+             for i, a in enumerate(APPS, 1)]},
+    ]
+
+
+def page_ld(title: str, desc: str, path: str) -> list:
+    return [{"@type": "WebPage", "@id": SITE + path + "#seite", "name": title, "description": desc, "url": SITE + path,
+             "inLanguage": "de", "isPartOf": {"@id": WEBSITE_ID}}]
+
+
+def shell(title: str, desc: str, body: str, root: str, path: str, ld: list) -> str:
     e = html.escape
     return f"""<!DOCTYPE html>
 <html lang="de">
@@ -121,10 +161,21 @@ def shell(title: str, desc: str, body: str, root: str) -> str:
   <title>{e(title)}</title>
   <meta name="description" content="{e(desc)}">
   <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="{SITE}{path}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="nxtChange Apps">
+  <meta property="og:title" content="{e(title)}">
+  <meta property="og:description" content="{e(desc)}">
+  <meta property="og:url" content="{SITE}{path}">
+  <meta property="og:locale" content="de_AT">
+  <meta property="og:image" content="{OG_IMAGE}">
+  <meta property="og:image:width" content="{OG_IMAGE_SIZE}">
+  <meta property="og:image:height" content="{OG_IMAGE_SIZE}">
+  <meta property="og:image:alt" content="{e(OG_IMAGE_ALT)}">
   <link rel="icon" href="{root}favicon.ico" sizes="any">
   <link rel="icon" href="{root}assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="{root}assets/apple-touch-icon.png">
-  <style>{CSS.replace('url(assets/', f'url({root}assets/')}</style>
+  <style>{CSS.replace('url(assets/', f'url({root}assets/')}</style>{json_ld(ld)}
 </head>
 <body>
   <div class="wrap">
@@ -157,7 +208,7 @@ def shell(title: str, desc: str, body: str, root: str) -> str:
 
 def app_card(a: dict) -> str:
     e = html.escape
-    icon = (f'<img class="icon" src="{e(a["icon"])}" alt="" width="72" height="72">' if a["icon"]
+    icon = (f'<img class="icon" src="{e(a["icon"])}" alt="App-Icon von {e(a["name"])}" width="72" height="72">' if a["icon"]
             else f'<div class="icon empty" aria-hidden="true">{e(a["name"][0])}</div>')
     english = f' <small>English: {e(a["english"])}</small>' if a["english"] else ""
     meta = [f"<span>{e(a['plattform'])}</span>"]
@@ -251,9 +302,13 @@ INDEX_DESC = ("nxtChange Consulting entwickelt in Graz kleine Apps für den Allt
 
 # (Datei, Pfad auf der Website, Titel, Beschreibung, Inhalt, relativer Weg zur Wurzel)
 pages = [
-    ("index.html", "/", "nxtChange Apps", INDEX_DESC, index_body, "./"),
-    ("impressum/index.html", "/impressum/", "Impressum", "Anbieterangaben der nxtChange Consulting FlexCo.", impressum_body, "../"),
-    ("datenschutz/index.html", "/datenschutz/", "Datenschutz", "Datenschutz auf nxtchange.app.", datenschutz_body, "../"),
+    ("index.html", "/", f"nxtChange Apps: {', '.join(NAMEN[:-1])} und {NAMEN[-1]} aus Graz", INDEX_DESC, index_body, "./"),
+    ("impressum/index.html", "/impressum/", "Impressum · nxtChange Apps",
+     "Impressum von nxtchange.app: Anbieter der Apps ist die nxtChange Consulting FlexCo in Graz. Firmenbuch, UID, Gewerbe und Kontakt.",
+     impressum_body, "../"),
+    ("datenschutz/index.html", "/datenschutz/", "Datenschutz · nxtChange Apps",
+     "Datenschutz auf nxtchange.app: Hosting bei GitHub Pages, keine Cookies, keine Analyse, keine Skripte von Dritten. Deine Rechte und der Kontakt.",
+     datenschutz_body, "../"),
 ]
 
 AI_CRAWLERS = [
@@ -302,7 +357,7 @@ def llms_txt() -> str:
         if a["llms"]:
             zeilen.append(f"  - Kurzfassung für Sprachmodelle: {a['llms']}")
         return "\n".join(zeilen)
-    seiten = "\n".join(f"- [{'Startseite' if path == '/' else title}]({SITE}{path}): {desc}" for _, path, title, desc, *_ in pages)
+    seiten = "\n".join(f"- [{'Startseite' if path == '/' else title.split(' · ')[0]}]({SITE}{path}): {desc}" for _, path, title, desc, *_ in pages)
     return f"""# nxtChange Apps
 
 > nxtchange.app ist das Register der Apps von nxtChange Consulting FlexCo aus Graz, Österreich. Es führt alle Apps mit Status und Links, auch die, die noch im Bau sind: {', '.join(NAMEN[:-1])} und {NAMEN[-1]}. Alle Apps kommen ohne Konto aus, ohne Werbung und ohne Analyse-SDKs; die Daten bleiben auf dem Gerät. Einzige Ausnahme: Mappe Plus gleicht Ende-zu-Ende verschlüsselt über einen Server ab, den der Anbieter nicht lesen kann.
@@ -327,7 +382,8 @@ for rel, path, title, desc, body, root in pages:
     body = body.replace('src="assets/', f'src="{root}assets/')
     target = OUT / rel
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(shell(title, desc, body, root), encoding="utf-8")
+    ld = index_ld() if path == "/" else page_ld(title, desc, path)
+    target.write_text(shell(title, desc, body, root, path, ld), encoding="utf-8")
     print(f"{target} ({target.stat().st_size // 1024} KB)")
 
 for name, text in [("robots.txt", robots_txt()), ("sitemap.xml", sitemap_xml()), ("llms.txt", llms_txt())]:
